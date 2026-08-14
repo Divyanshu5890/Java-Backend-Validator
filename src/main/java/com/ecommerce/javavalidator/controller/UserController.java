@@ -1,5 +1,6 @@
 package com.ecommerce.javavalidator.controller;
 
+import com.ecommerce.javavalidator.model.ValidationResult;
 import com.ecommerce.javavalidator.service.UserValidatorService;
 import com.ecommerce.javavalidator.validator.UserValidator;
 
@@ -14,7 +15,7 @@ public class UserController {
     private UserValidatorService service = new UserValidatorService();
 
     @PostMapping("/validate")
-    public boolean validateUser(@RequestBody UserData user) {
+    public ValidationResult validateUser(@RequestBody UserData user) {
         return service.validateUser(user);
     }
 

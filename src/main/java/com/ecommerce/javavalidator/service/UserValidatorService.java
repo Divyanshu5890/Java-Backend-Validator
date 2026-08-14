@@ -1,27 +1,35 @@
 package com.ecommerce.javavalidator.service;
+import com.ecommerce.javavalidator.model.ValidationResult;
 import com.ecommerce.javavalidator.validator.UserValidator;
 import com.ecommerce.javavalidator.model.UserData;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserValidatorService {
     private UserValidator validator = new UserValidator();
 
-    public boolean validateUser(UserData user) {
+    public ValidationResult validateUser(UserData user) {
+        List<String>errors=new ArrayList<>();
+        ValidationResult result=validator.ValidateName(user);
+        if(!result.isValid()){
+            errors.addAll(result.getErrors());
 
-        if (!validator.ValidateName(user)) {
-            return false;
         }
-
-        if (!validator.ValidateEmail(user)) {
-            return false;
+        ValidationResult result1=validator.ValidateEmail(user);
+        if(!result1.isValid()){
+            errors.addAll(result1.getErrors());
         }
-
-        if (!validator.ValidatePassword(user)) {
-            return false;
+        ValidationResult result2=validator.ValidatePassword(user);
+        if(!result2.isValid()){
+            errors.addAll(result2.getErrors());
         }
-
-        if (!validator.ValidatePhone(user)) {
-            return false;
+        ValidationResult result3=validator.ValidatePhone(user);
+        if(!result3.isValid()){
+            errors.addAll(result3.getErrors());
         }
+        return new ValidationResult(errors.isEmpty(),errors);
 
-        return true;
     }
+
 }
