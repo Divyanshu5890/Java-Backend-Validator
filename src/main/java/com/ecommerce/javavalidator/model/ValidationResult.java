@@ -1,22 +1,18 @@
 package com.ecommerce.javavalidator.model;
-
-import java.util.List;
+import java.util.Map;
 
 public class ValidationResult {
     private boolean valid;
-    private List<String> errors;
+    private Map<String,String> errors;
 
-    public ValidationResult(boolean valid,List<String>errors) {
+    public ValidationResult(boolean valid, Map<String,String> errors) {
         this.valid=valid;
         this.errors=errors;
     }
     public boolean isValid() {
         return valid;
     }
-    public List<String> getErrors() {
+    public Map<String,String> getErrors() {
         return errors;
     }
-
-
-
 }
